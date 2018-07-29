@@ -27,7 +27,7 @@ There are three tables in total.
 
 
 
-user table:
+### user table:
 
 user_id (Primary Key)
 
@@ -39,7 +39,7 @@ buyer_accepts_marketing
 
 
 
-order table:
+### order table:
 
 id (Primary Key)
 
@@ -109,7 +109,7 @@ order_status_url
 
 
 
-orderline table:
+### orderline table:
 
 line_id (Primary Key)
 
