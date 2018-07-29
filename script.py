@@ -85,7 +85,15 @@ def get_order_query(directory):
                     updated_at = process_timestamp(dic["updated_at"])
                     processed_at = process_timestamp(dic["processed_at"])
                     cur.execute(query, (dic["id"],dic["user_id"],dic["order_number"],dic["number"],dic["token"], created_at, updated_at, processed_at ,dic["gateway"],dic["test"], float(dic["total_price_usd"]),float(dic["subtotal_price"]),float(dic["total_weight"]),float(dic["total_tax"]),dic["taxes_included"],dic["financial_status"],dic["confirmed"],float(dic["total_discounts"]),float(dic["total_line_items_price"]),dic["cart_token"],dic["name"],dic["checkout_token"],dic["reference"],dic["source_identifier"],dic["contact_email"],dic["device_id"],dic["app_id"],dic["browser_ip"],dic["processing_method"],dic["checkout_id"],dic["source_name"],dic["order_status_url"]))
+                    cur.execute("ALTER TABLE Orderlines ADD CONSTRAINT fk_orderline FOREIGN KEY (order_id) REFERENCES Orders (id)")
 
+if __name__ == '__main__':
+    create_user_table()
+    create_ordervariants_table()
+    create_order_table()
+    get_user_query('../data')
+    get_orderline_query('../data')
+    get_order_query('../data')
 
 
 
