@@ -14,18 +14,22 @@ database = 'balm_cleanser_makeup'
 conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
 cur = conn.cursor()
 
+# Create Users table
 def create_user_table():
     cur.execute('DROP TABLE IF EXISTS Users;')
     cur.execute('CREATE TABLE Users(user_id BIGINT PRIMARY KEY, email CHAR(255), customer_locale CHAR(255), buyer_accepts_marketing BOOLEAN);')
 
+# Create Orderlines table
 def create_ordervariants_table():
     cur.execute('DROP TABLE IF EXISTS Orderlines;')
     cur.execute('CREATE TABLE Orderlines(line_id BIGINT NOT NULL, order_id BIGINT NOT NULL, variant_id BIGINT, product_id BIGINT, quantity INTEGER, PRIMARY KEY (line_id));')
 
+# Create Orders table
 def create_order_table():
     cur.execute('DROP TABLE IF EXISTS Orders;')
     cur.execute('CREATE TABLE Orders(id BIGINT NOT NULL, user_id BIGINT NOT NULL, order_number BIGINT, number BIGINT, token CHAR(255), created_at TIMESTAMP, updated_at TIMESTAMP, processed_at TIMESTAMP, gateway CHAR(255), test BOOLEAN, total_price_usd FLOAT, subtotal_price FLOAT, total_weight FLOAT, total_tax FLOAT, taxes_included BOOLEAN, financial_status CHAR(255), confirmed BOOLEAN, total_discounts FLOAT, total_line_items_price FLOAT, cart_token CHAR(255), name CHAR(255), checkout_token CHAR(255), reference VARCHAR(255), source_identifier CHAR(255), contact_email CHAR(255), device_id BIGINT, app_id BIGINT, browser_ip CHAR(255), processing_method CHAR(255), checkout_id BIGINT, source_name CHAR(255), order_status_url CHAR(255), PRIMARY KEY(id), FOREIGN KEY(user_id) REFERENCES Users (user_id));')
 
+# Insert records into Users table
 def get_user_query(directory):
     l = set()
     for filename in os.listdir(directory):
@@ -40,6 +44,7 @@ def get_user_query(directory):
                     cur.execute(query, (dic["user_id"],dic["email"],dic["customer_locale"],dic["buyer_accepts_marketing"]))
 
 
+# Insert records into Orderlines table
 def get_orderline_query(directory):
     l = set()
     for filename in os.listdir(directory):
@@ -70,6 +75,8 @@ def process_timestamp(ts):
         output_datetime = output_datetime + offset_delta
     return output_datetime
 
+
+# Insert records into Orders
 def get_order_query(directory):
     l = set()
     for filename in os.listdir(directory):
