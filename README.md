@@ -128,4 +128,8 @@ quantity
 
 I converted timestamp with offset like "2017-12-27T17:00:30-05:00" to UTC time
 
+## Further Improvements:
 
+We can add index to tables depending on what specific query you are going execute. By adding index to columns, we can speed up our read speed.
+
+For instance, if you want to query orders in a specific time range, we can add index to timestamp column in Orders table. If you want to query all the orders made by a specific user, we can add index to user_id column in Orders table.
