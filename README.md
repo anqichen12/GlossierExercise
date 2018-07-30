@@ -1,4 +1,4 @@
-# ShopifyETL
+# GlossierExercise
 
 ## Data Description
 
