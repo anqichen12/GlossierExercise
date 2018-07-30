@@ -67,6 +67,7 @@ def process_timestamp(ts):
     # split on the offset to remove it
     split_timestamp = re.split(r"[+|-]",conformed_timestamp)
     output_datetime = datetime.strptime(split_timestamp[0] +"Z", "%Y%m%dT%H%M%SZ" )
+    # add the time offset if syntax is '-', subtract the time offset if syntax is '+'
     if conformed_timestamp[-5]=='-':
         offset_delta = timedelta(hours=int(split_timestamp[1][:-2]), minutes=int(split_timestamp[1][-2:]))
         output_datetime = output_datetime + offset_delta
