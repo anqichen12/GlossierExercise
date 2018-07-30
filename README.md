@@ -18,16 +18,14 @@ app_id: The ID of the app that created the order
 
 line_items_id: unique identifier for each line items.
 
-Since there are several columns with all NULL values, I decided to drop these columns: closed_at, note, source_url, landing_site_ref.
-
-Also, I droped currency column since we can use column total_price_usd.
-
 
 ## Schema
 
 There are three tables in total. 
 
+Since there are several columns with all NULL values, I decided to drop these columns: closed_at, note, source_url, landing_site_ref.
 
+Also, I droped currency column since we can use column total_price_usd.
 
 ### user table:
 
